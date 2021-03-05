@@ -8,7 +8,7 @@ const App: React.FC = () => {
   const [searchUrl, setSearchUrl] = React.useState('');
 
   return (
-    <div style={{ position: 'relative', zIndex: 9999, top: '2rem' }}>
+    <div>
       <Search onSearchChange={setSearchUrl} />
       <SearchResults searchUrl={searchUrl}></SearchResults>
     </div>

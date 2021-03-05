@@ -4,5 +4,5 @@ import { Link } from 'react-router-dom';
 import SearchContainer from './components/SearchContainer';
 
 export function setup(app: PiletApi) {
-  app.registerPage('/search', SearchContainer); //todo
+  app.registerExtension('search', SearchContainer);
 }
