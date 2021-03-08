@@ -40,6 +40,7 @@
   },
   "scripts": {
     "start": "pilet debug",
+    "debug": "pilet debug --feed https://feed.piral.cloud/api/v1/pilet/dante-feed",
     "build": "pilet build",
     "upgrade": "pilet upgrade"
   },
