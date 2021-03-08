@@ -4,7 +4,7 @@ import SearchResults from './SearchResults';
 
 const apiKey = '87dfa1c669eea853da609d4968d294be';
 
-const App: React.FC = () => {
+const SearchContainer: React.FC = () => {
   const [searchUrl, setSearchUrl] = React.useState('');
 
   return (
@@ -15,4 +15,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default SearchContainer;
