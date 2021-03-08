@@ -1,10 +1,11 @@
 import * as React from 'react';
-import Item from './Item';
 import data from '../models/data';
+import { MovieTileProps } from '../models/MovieTileProps';
 
 export interface TitleListProps {
   url: string;
   title: string;
+  MovieTile: React.FC<MovieTileProps>;
 }
 
 const apiKey = '87dfa1c669eea853da609d4968d294be';
@@ -35,7 +36,13 @@ const TitleList: React.FC<TitleListProps> = props => {
       let backDrop = 'http://image.tmdb.org/t/p/original' + title.backdrop_path;
       let name = title.name ? title.name : title.original_title;
       return (
-        <Item key={title.id} title={name} score={title.vote_average} overview={title.overview} backdrop={backDrop} />
+        <props.MovieTile
+          key={title.id}
+          title={name}
+          score={title.vote_average}
+          overview={title.overview}
+          backdrop={backDrop}
+        ></props.MovieTile>
       );
     });
   } else {
