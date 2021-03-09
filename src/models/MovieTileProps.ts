@@ -3,4 +3,6 @@ export interface MovieTileProps {
     title: string;
     score: string;
     overview: string;
+    movieId: string;
+    media_type: 'tv' | 'movie';
 }

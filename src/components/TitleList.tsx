@@ -38,6 +38,8 @@ const TitleList: React.FC<TitleListProps> = props => {
       return (
         <props.MovieTile
           key={title.id}
+          movieId={title.id}
+          media_type={title.media_type}
           title={name}
           score={title.vote_average}
           overview={title.overview}
