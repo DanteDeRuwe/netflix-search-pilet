@@ -1,6 +1,6 @@
 {
   "name": "search",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "",
   "keywords": [
     "pilet"
@@ -18,7 +18,7 @@
     "path-to-regexp": "1.8.0",
     "piral-cli": "next",
     "piral-cli-webpack": "^0.12.4",
-    "piral-tryout": "1.1.18",
+    "piral-tryout": "1.1.19",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-router": "5.2.0",
