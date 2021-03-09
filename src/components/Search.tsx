@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { debounce } from '../utils/debounce';
 
 export interface SearchProps {
   onSearchChange: Function;
@@ -16,12 +17,17 @@ const Search: React.FC<SearchProps> = props => {
         return;
       }
 
-      if (e.key === 'Enter') {
-        var searchUrl = 'search/multi?query=' + searchTerm + '&api_key=' + apiKey;
-        props.onSearchChange(searchUrl);
-      }
+      handleSearch(searchTerm);
     },
     [searchTerm, props.onSearchChange]
+  );
+
+  const handleSearch = React.useCallback(
+    debounce(value => {
+      var searchUrl = 'search/multi?query=' + value + '&api_key=' + apiKey;
+      props.onSearchChange(searchUrl);
+    }, 500),
+    []
   );
 
   const handleChange = React.useCallback(e => {
@@ -33,6 +39,7 @@ const Search: React.FC<SearchProps> = props => {
       <input
         onKeyUp={handleKeyUp}
         onChange={handleChange}
+        onFocus={handleKeyUp}
         type="search"
         placeholder="Search for a title..."
         value={searchTerm}
