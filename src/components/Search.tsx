@@ -1,9 +1,6 @@
 import * as React from 'react';
+import { SearchProps } from '../models/proptypes';
 import { debounce } from '../utils/debounce';
-
-export interface SearchProps {
-  onSearchChange: Function;
-}
 
 const apiKey = '87dfa1c669eea853da609d4968d294be';
 
@@ -12,7 +9,7 @@ const Search: React.FC<SearchProps> = props => {
 
   const handleKeyUp = React.useCallback(
     e => {
-      if (searchTerm === '') {
+      if (!searchTerm) {
         props.onSearchChange(null);
         return;
       }
@@ -37,8 +34,8 @@ const Search: React.FC<SearchProps> = props => {
   return (
     <div id="search" className="Search">
       <input
-        onKeyUp={handleKeyUp}
         onChange={handleChange}
+        onKeyUp={handleKeyUp}
         onFocus={handleKeyUp}
         type="search"
         placeholder="Search for a title..."

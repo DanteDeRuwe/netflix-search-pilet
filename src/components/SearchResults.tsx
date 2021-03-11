@@ -1,18 +1,61 @@
 import * as React from 'react';
-import { MovieTileProps } from '../models/MovieTileProps';
-import TitleList from './TitleList';
+import { MovieTileProps, SearchResultsProps } from '../models/proptypes';
+import { ApiData, ApiDataEntry } from '../models/types';
 
-export interface SearchResultsProps {
-  searchUrl: string;
-  MovieTile: React.FC<MovieTileProps>;
-}
+const apiKey = '87dfa1c669eea853da609d4968d294be';
 
 const SearchResults: React.FC<SearchResultsProps> = props => {
-  return props.searchUrl ? (
+  const [mounted, setMounted] = React.useState(false);
+  const [data, setData] = React.useState<ApiData>({});
+
+  const loadContent = () => {
+    let requestUrl = `https://api.themoviedb.org/3/${props.searchUrl}&api_key=${apiKey}`;
+    fetch(requestUrl)
+      .then(res => res.json())
+      .then(setData)
+      .catch(console.error);
+  };
+
+  React.useEffect(() => {
+    setMounted(true);
+    loadContent();
+  }, [props.searchUrl]);
+
+  if (!props.searchUrl) return null;
+
+  let titles: JSX.Element[] = [];
+  if (data.results) {
+    const slice = data.results.slice(0, 5);
+    titles = slice.map(title => {
+      const movieTileProps: MovieTileProps = createMovieTileProps(title);
+      return <props.MovieTile key={title.id} {...movieTileProps}></props.MovieTile>;
+    });
+  }
+
+  return (
     <div className="SearchResults">
-      <TitleList title="Search Results" url={props.searchUrl} MovieTile={props.MovieTile} />
+      <div className="TitleList" data-loaded={mounted}>
+        <div className="Title">
+          <div className="titles-wrapper">
+            {data.results ? titles : <p style={{ color: 'gray' }}> nothing was found</p>}
+          </div>
+        </div>
+      </div>
     </div>
-  ) : null;
+  );
 };
 
 export default SearchResults;
+
+/*
+Helpers
+*/
+
+const createMovieTileProps = (title: ApiDataEntry) => ({
+  media_type: title.media_type,
+  movieId: title.id,
+  title: title.name || title.original_title,
+  score: title.vote_average,
+  overview: title.overview,
+  backdrop: `http://image.tmdb.org/t/p/original/${title.backdrop_path}`,
+});

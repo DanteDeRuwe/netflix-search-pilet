@@ -1,15 +1,9 @@
 import * as React from 'react';
-import { MovieTileProps } from '../models/MovieTileProps';
+import { SearchExtensionProps } from '../models/proptypes';
 import Search from './Search';
 import SearchResults from './SearchResults';
 
-const apiKey = '87dfa1c669eea853da609d4968d294be';
-
-interface SearchContainerProps {
-  MovieTile: React.FC<MovieTileProps>;
-}
-
-const SearchContainer: React.FC<SearchContainerProps> = ({ MovieTile }) => {
+const SearchExtension: React.FC<SearchExtensionProps> = ({ MovieTile }) => {
   const [searchUrl, setSearchUrl] = React.useState('');
 
   return (
@@ -20,4 +14,4 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ MovieTile }) => {
   );
 };
 
-export default SearchContainer;
+export default SearchExtension;
