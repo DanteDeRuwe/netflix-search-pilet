@@ -17,7 +17,7 @@ const SearchExtension: React.FC<SearchExtensionProps> = ({ MovieTile }) => {
   };
 
   return (
-    <div ref={wrapperRef}>
+    <div ref={wrapperRef} className="SearchContainer">
       <Search onSearchChange={performSearch} />
       {resultsVisible && <SearchResults searchUrl={searchUrl} MovieTile={MovieTile}></SearchResults>}
     </div>

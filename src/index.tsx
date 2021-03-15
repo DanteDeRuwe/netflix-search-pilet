@@ -6,5 +6,5 @@ import './style.scss';
 
 export function setup(app: PiletApi) {
   const MovieTile: React.FC<MovieTileProps> = props => <app.Extension name="MovieTile" params={props}></app.Extension>;
-  app.registerExtension('search', () => <SearchExtension MovieTile={MovieTile}></SearchExtension>);
+  app.registerExtension('header-items', () => <SearchExtension MovieTile={MovieTile}></SearchExtension>);
 }
